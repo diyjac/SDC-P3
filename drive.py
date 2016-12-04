@@ -79,6 +79,7 @@ if __name__ == '__main__':
     model.compile("adam", "mse")
     weights_file = args.model.replace('json', 'h5')
     model.load_weights(weights_file)
+    model.summary()
 
     # wrap Flask application with engineio's middleware
     app = socketio.Middleware(sio, app)
