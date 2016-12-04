@@ -131,7 +131,7 @@ We even try Track2 and it worked up to a certain point.
 ### 2g.  Destructive Testing.
 We even performed some destructive tests, where we interfaced with the test drive.py and test model with the pygame joystick module and delibrately steer the car off course by nudging the steering.  In most cases, the car reacted by steering back to the center.  Only in extreme cases, the car lost control and wonder off into the woods or into the lake.
 
-### 2h.  Testing Tools.
+### 2h.  Testing/Training Tools.
 We built numerous testing and training tools as discussed in the previous sections.  They are included in the training-tools directory.  The tools are:
 
 | Tool | Description | Usage |
