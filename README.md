@@ -1,9 +1,11 @@
 # SDC-P3
-Udacity Self-Driving Car Project 3: Behavior Cloning
+Udacity Self-Driving Car Project 3: Behavioral Cloning
+
+Use Behavioral Cloning to train a CNN model to drive a car in a simulator.
 
 ## 1. Network Structure
 
-The final CNN is based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.07316v1.pdf.  Before finalizing on this architecture, we experimented with a model from the Keras lab, and Comma.ai's model from: https://github.com/commaai/research.  The problem with both of these models is that they have too many model parameters and the hidden layers weights are much too large to be scalable.  The following table shows the size of the weights from save h5 files:
+Our final CNN is based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.07316v1.pdf.  Before finalizing on this architecture, we experimented with a model from the Keras lab, and Comma.ai's model from: https://github.com/commaai/research.  The problem with both of these models is that they have too many model parameters and the hidden layers weights are much too large to be scalable.  The following table shows the size of the weights from save h5 files:
 
 | Model | File | Size (Bytes) | Description |
 |:---:|:---|---:|:---|
@@ -20,7 +22,7 @@ The final CNN is based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.0731
 As can be seen, the NVIDIA based model weights are a lot smaller; and therefore, much more scalable and performs faster.  We pretty much followed the CNN network architecture from NVIDIA as outlined in their paper.  Our CNN consists of 10 layers, including an additional maxpool layer to even further reduce the number of parameters.  The layers includes a Lamda normalization layer, 5 convolutional layers and 3 fully connected layers with dropouts:
 
 | Layer (type) | Output Shape | Param # | Connected to |
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | ---: | :--- |
 | maxpooling2d_1 (MaxPooling2D) | (None, 33, 66, 3) | 0 | maxpooling2d_input_1[0][0] |
 | lambda_1 (Lambda) | (None, 33, 66, 3)| 0 | maxpooling2d_1[0][0] |
 | convolution2d_1 (Convolution2D) | (None, 9, 17, 5)| 1805 | lambda_1[0][0] |
