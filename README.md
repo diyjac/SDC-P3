@@ -6,7 +6,7 @@ Udacity Self-Driving Car Project 3: Behavior Cloning
 The final CNN is based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.07316v1.pdf.  Before finalizing on this architecture, we experimented with a model from the Keras lab, and Comma.ai's model from: https://github.com/commaai/research.  The problem with both of these models is that they have too many model parameters and the hidden layers weights are much too large to be scalable.  The following table shows the size of the weights from save h5 files:
 
 | Model | File | Size (Bytes) | Description |
-|:---:|:---:|:---:|:---:|
+|:---:|:---|---:|:---|
 | 1 | model1.h5 | 374997240 | Best performing Keras lab model |
 | 2 | model2.h5 | 2901288 | Comma.ai model, without Lamda layer |
 | 3 | model3.h5 | 26506536 | Comma.ai model, with Lamda layer |
@@ -20,7 +20,7 @@ The final CNN is based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.0731
 As can be seen, the NVIDIA based model weights are a lot smaller; and therefore, much more scalable and performs faster.  We pretty much followed the CNN network architecture from NVIDIA as outlined in their paper.  Our CNN consists of 10 layers, including an additional maxpool layer to even further reduce the number of parameters.  The layers includes a Lamda normalization layer, 5 convolutional layers and 3 fully connected layers with dropouts:
 
 | Layer (type) | Output Shape | Param # | Connected to |
-| :---: | :---: | :---: | :---: |
+| :--- | :--- | :--- | :--- |
 | maxpooling2d_1 (MaxPooling2D) | (None, 33, 66, 3) | 0 | maxpooling2d_input_1[0][0] |
 | lambda_1 (Lambda) | (None, 33, 66, 3)| 0 | maxpooling2d_1[0][0] |
 | convolution2d_1 (Convolution2D) | (None, 9, 17, 5)| 1805 | lambda_1[0][0] |
@@ -67,11 +67,15 @@ And these steps are also included in the new drive.py module.  We also increase 
 
 ### 2a. Optimizer Selection
 In the final architecture, we decided to use the Keras builtin support for the Adam optimizer as in our architecture in project 2.  The Adam optimizer, as explained in project 2, is Kingma and Ba's modified version of the Stochastic Gradient Descent that allows the use of larger step sizes without fine tuning.
+
 ![Minimize Loss](http://image.slidesharecdn.com/publishintroductiontodeeplearninginpythonandmatlab1-160502102437/95/introduction-to-deep-learning-in-python-and-matlab-58-638.jpg?cb=1462185644)
+
 It uses moving averages of the parameters (momentum) to achieve this, as discussed in section 3.1.1: https://arxiv.org/pdf/1206.5533.pdf.  In general, the Adam optimizer uses cross entropy calculations to minimize loss (average distance to the target label in the solution space) and use gradient descent, an iterative optimization technique and algorithm to achieve this goal.  Even though using the Adam optimizer should allow us to use larger step sizes (learning rates), we decided to restrict this hyper parameter to 0.00001.  This made it so that the model never seem to converge, so it never over-fit; however, in subsequent tests, the model performed exceptionally well in steering the car in the simulator and making sure that the car remaining in the center of the lane.  
 
 ### 2b. Simulator Training Input
 We first started out with driving the simulator using keyboard, but that was unsatisfactory.  The controls were jerky and resulted in port data collection.  We obtained a Sony PS4 controller and found that the Unity simulator was able to respond correctly to this input device using the xboxdrv.  We include the PS4Controller.sh that we used to initialize the device for connecting to the simulator in the training-tools directory in the repository.
+
+![PS4 Joystick](./ps4joystick.jpg)
 
 ### 2c. Driving Both Counter Clockwise and Clockwise around Track1
 The training data were initially collected using the simulator for track 1 only in the forward direction (counter clockwise) for about 10 times.  However, during testing in Autonomous mode, we found that the CNN had a tendency of moving to the left, so we ran Track1 again 10 times in the reverse (clockwise) direction.  This is so we could make balance the left steering tendency with a set of right turn steers by going in the opposite direction.
@@ -79,6 +83,7 @@ The training data were initially collected using the simulator for track 1 only 
 ### 2d. Training Set Data:
 The training set data collected include two sets of files.  A CSV that contained the file path to the current center, right and left camara images, as well as, the current throttle, brake, speed and steering information.  The trainer, instead of reading the entire dataset into memory, used the model.fit_generator function in Keras to bring in just one image at a time to feed the Titan X pascal GPU that we use for the training and validation.  Below are some samples of the data in the CSV and images from the left, center and right camaras.
 
+#### - CSV File
 ```
 center,left,right,steering,throttle,brake,speed
 ...
@@ -87,8 +92,14 @@ center,left,right,steering,throttle,brake,speed
 /home/jchen/SDCND/BehaviorCloning/drivingDataTrack1/IMG/center_2016_12_01_13_31_14_398.jpg, /home/jchen/SDCND/BehaviorCloning/drivingDataTrack1/IMG/left_2016_12_01_13_31_14_398.jpg, /home/jchen/SDCND/BehaviorCloning/drivingDataTrack1/IMG/right_2016_12_01_13_31_14_398.jpg, 0, 0, 0, 1.254873
 ...
 ```
+
+#### - Left Camera
 ![Left](./left_2016_12_01_13_31_13_381.jpg)
+
+#### - Center Camera
 ![Center](./center_2016_12_01_13_31_13_381.jpg)
+
+#### - Right Camera
 ![Right](./right_2016_12_01_13_31_13_381.jpg)
 
 As discussed earlier, these images if processed, will be converted to YUV and then resized to 200x66 and the top 22 rows cropped.
@@ -122,7 +133,7 @@ We even performed some destructive tests, where we interfaced with the test driv
 We built numerous testing and training tools as discussed in the previous sections.  They are included in the training-tools directory.  The tools are:
 
 | Tool | Description | Usage |
-| :---: | :--- | :--- |
+| :--- | :--- | :--- |
 | PS4Controller.sh | Shell script to launch PS4/XBOX controller driver | sudo ./PS4Controller.sh |
 | pygamejoy.py | Inspiration script to interface with joystick using pygame: http://www.pygame.org/docs/ref/joystick.html | python pygamejoy.py |
 | pygameJoyDriveInterface.py | Initial Prototype to interface pygame, drive.py and the model | python pygameJoyDriveInterface model.json |
