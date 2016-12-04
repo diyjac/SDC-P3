@@ -116,7 +116,15 @@ As we trained, we grew tired of having to batch and then train and rebatch as we
 
 ![NVIDIA Driving Simulator](./NVIDIA_Drive_Simulator.png)
 
-NVIDIA, it seems, created their own simulator using the data they recorded using human drivers.  Initially we use the same path as NVIDIA by generating jitter data using the different camera angles.  But that was still unsatisfactory since we were limited by the angle that the car was facing, so we still needed to collect new data as we find additional steering issues when testing in Autonomous mode.  We finally decided to try a prototype to interface directly with the drive.py and the trainer using pygame joystick interface as the input.  At first, we were unsuccessful, because we could not start up the socket and the model trainer at the same time; however, we finally tried the threading libraries in Python and were about to launch both the websockets and the Keras model trainer at the same time!  The experiment/prototype was a success, and we were able to both drive via the joystick and train the model at the same time.  It was a turning point.
+NVIDIA, it seems, created their own simulator using the data they recorded using human drivers.  Initially we use the same path as NVIDIA by generating jitter data using the different camera angles.  But that was still unsatisfactory since we were limited by the angle that the car was facing, so we still needed to collect new data as we find additional steering issues when testing in Autonomous mode.  We finally decided to try a prototype to interface directly with the drive.py.
+
+![Initial Drive and Joystick Interface Design ](./InitialDriveJoystickInterfaceDesign.jpg)
+
+And the trainer using pygame joystick interface as the input.  At first, we were unsuccessful, because we could not start up the socket and the model trainer at the same time; however, we finally tried the threading libraries in Python and were about to launch both the websockets and the Keras model trainer at the same time!  
+
+![Final Continuous Trainer Design ](./FinalContinuousTrainerDesign.jpg)
+
+The experiment/prototype was a success, and we were able to both drive via the joystick and train the model at the same time.  It was a turning point.
 
 ![Continous Training: Directly Interfacing the Trainer and Simulator ](./continuous_training_on_track1.png)
 
