@@ -1,4 +1,4 @@
-# SDC-P3
+/ SDC-P3
 Udacity Self-Driving Car Project 3: Behavioral Cloning
 
 Use Behavioral Cloning to train a CNN model to drive a car in a simulator.
@@ -59,7 +59,7 @@ More details of this architecture can be obtained in the NVIDIA paper as referen
 
 - 1.  Resize the image from 320x160 to 200x66.
 - 2.  Convert the 200x66 image from RGB to YUV.
-- 3.  Crop the first 22 row from the top so the image is now 200x44 and then resize it back to 200x66.
+- 3.  Crop the first 22 rows from the top so the image is now 200x44 and then resize it back to 200x66.
 
 ![Image Pre-processing](./training_input_transforms.png)
 
