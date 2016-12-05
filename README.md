@@ -112,7 +112,7 @@ As discussed earlier, these images if processed, will be converted to YUV and th
 As always, in our training we split the training data into batch training and validation, and we did this up to model7.  But stopped when we started using the Continuous (Agile) Trainer, which will be explained in the next section.
 
 ### 2f. Continuous (Agile) Trainer
-As we trained, we grew tired of having to batch and then train and rebatch as we found new issues with our training data, or missing data that we needed to train on.  This was very unsatisfactory, so we decided to try a different approach.  Barrowing from Agile development, we decided that the loop from model design, training and testing needs to be faster and more responsive, so we looked again at NVIDIA's paper for inspiration and we found this:
+As we trained, we grew tired of having to batch and then train and rebatch as we found new issues with our training data, or missing data that we needed to train on.  This was very unsatisfactory, so we decided to try a different approach.  Borrowing from Agile development, we decided that the loop from model design, training and testing needs to be faster and more responsive, so we looked again at NVIDIA's paper for inspiration and we found this:
 
 ![NVIDIA Driving Simulator](./NVIDIA_Drive_Simulator.png)
 
