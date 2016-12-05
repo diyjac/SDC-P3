@@ -75,9 +75,9 @@ In the final architecture, we decided to use the Keras builtin support for the A
 It uses moving averages of the parameters (momentum) to achieve this, as discussed in section 3.1.1: https://arxiv.org/pdf/1206.5533.pdf.  In general, the Adam optimizer uses cross entropy calculations to minimize loss (average distance to the target label in the solution space) and use gradient descent, an iterative optimization technique and algorithm to achieve this goal.  Even though using the Adam optimizer should allow us to use larger step sizes (learning rates), we decided to restrict this hyper parameter to 0.00001.  This made it so that the model never seem to converge, so it never over-fit; however, in subsequent tests, the model performed exceptionally well in steering the car in the simulator and making sure that the car remaining in the center of the lane.  
 
 ### 2b. Simulator Training Input
-We first started out with driving the simulator using keyboard, but that was unsatisfactory.  The controls were jerky and resulted in port data collection, since it was a digit input device (off|on).  We obtained a Sony PS4 controller and found that the Unity simulator was able to respond correctly to this input device using the xboxdrv.  We include the PS4Controller.sh that we used to initialize the device for connecting to the simulator in the training-tools directory in the repository.  The new controller's analog to digital input gave us a floating point input which made the steering much smoother.
+We first started out with driving the simulator using keyboard, but that was unsatisfactory.  The controls were jerky and resulted in poor data collection, since it was a digit input device (off|on).  We obtained a Sony PS3 controller and found that the Unity simulator was able to respond correctly to this input device using the xboxdrv.  We include the PS3Controller.sh that we used to initialize the device for connecting to the simulator in the training-tools directory in the repository.  The new controller's analog to digital input gave us a floating point input which made the steering much smoother.
 
-![PS4 Joystick](./ps4joystick.jpg)
+![PS3 Joystick](./ps4joystick.jpg)
 
 ### 2c. Driving Both Counter Clockwise and Clockwise around Track1
 The training data were initially collected using the simulator for track 1 only in the forward direction (counter clockwise) for about 10 times.  However, during testing in Autonomous mode, we found that the CNN had a tendency of moving to the left, so we ran Track1 again 10 times in the reverse (clockwise) direction.  This is so we could make balance the left steering tendency with a set of right turn steers by going in the opposite direction.
@@ -144,7 +144,7 @@ We built numerous testing and training tools as discussed in the previous sectio
 
 | Tool | Description | Usage |
 | :--- | :--- | :--- |
-| PS4Controller.sh | Shell script to launch PS4/XBOX controller driver | sudo ./PS4Controller.sh |
+| PS3Controller.sh | Shell script to launch PS3/XBOX controller driver | sudo ./PS3Controller.sh |
 | pygamejoy.py | Inspiration script to interface with joystick using pygame: http://www.pygame.org/docs/ref/joystick.html | python pygamejoy.py |
 | pygameJoyDriveInterface.py | Initial Prototype to interface pygame, drive.py and the model | python pygameJoyDriveInterface model.json |
 | continuousTrainer.py | Continuous Trainer | python continuousTrainer.py model.json |
