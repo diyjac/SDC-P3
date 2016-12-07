@@ -1,4 +1,4 @@
-/ SDC-P3
+SDC-P3
 Udacity Self-Driving Car Project 3: Behavioral Cloning
 
 Use Behavioral Cloning to train a CNN model to drive a car in a simulator.
@@ -80,7 +80,7 @@ We first started out with driving the simulator using keyboard, but that was uns
 ![PS3 Joystick](./ps4joystick.jpg)
 
 ### 2c. Driving Both Counter Clockwise and Clockwise around Track1
-The training data were initially collected using the simulator for track 1 only in the forward direction (counter clockwise) for about 10 times.  However, during testing in Autonomous mode, we found that the CNN had a tendency of moving to the left, so we ran Track1 again 10 times in the reverse (clockwise) direction.  This is so we could make balance the left steering tendency with a set of right turn steers by going in the opposite direction.
+The training data were initially collected using the simulator for track 1 only in the forward direction (counter clockwise) for able 10 times.  However, during testing in Autonomous mode, we found that the CNN had a tendency of moving to the left, so we ran Track1 again 10 times in the reverse (clockwise) direction.  This is so we could make balance the left steering tendency with a set of right turn steers by going in the opposite direction.
 
 ### 2d. Training Set Data:
 The training set data collected include two sets of files.  A CSV that contained the file path to the current center, right and left camara images, as well as, the current throttle, brake, speed and steering information.  The trainer, instead of reading the entire dataset into memory, used the model.fit_generator function in Keras to bring in just one image at a time to feed the Titan X pascal GPU that we use for the training and validation.  Below are some samples of the data in the CSV and images from the left, center and right camaras.
