@@ -1,4 +1,4 @@
-# SDC-P3
+/ SDC-P3
 Udacity Self-Driving Car Project 3: Behavioral Cloning
 
 Use Behavioral Cloning to train a CNN model to drive a car in a simulator.
@@ -59,7 +59,7 @@ More details of this architecture can be obtained in the NVIDIA paper as referen
 
 - 1.  Resize the image from 320x160 to 200x66.
 - 2.  Convert the 200x66 image from RGB to YUV.
-- 3.  Crop the first 22 bytes from the top so the image is now 200x44 and then resize it back to 200x66.
+- 3.  Crop the first 22 rows from the top so the image is now 200x44 and then resize it back to 200x66.
 
 ![Image Pre-processing](./training_input_transforms.png)
 
@@ -75,9 +75,9 @@ In the final architecture, we decided to use the Keras builtin support for the A
 It uses moving averages of the parameters (momentum) to achieve this, as discussed in section 3.1.1: https://arxiv.org/pdf/1206.5533.pdf.  In general, the Adam optimizer uses cross entropy calculations to minimize loss (average distance to the target label in the solution space) and use gradient descent, an iterative optimization technique and algorithm to achieve this goal.  Even though using the Adam optimizer should allow us to use larger step sizes (learning rates), we decided to restrict this hyper parameter to 0.00001.  This made it so that the model never seem to converge, so it never over-fit; however, in subsequent tests, the model performed exceptionally well in steering the car in the simulator and making sure that the car remaining in the center of the lane.  
 
 ### 2b. Simulator Training Input
-We first started out with driving the simulator using keyboard, but that was unsatisfactory.  The controls were jerky and resulted in port data collection, since it was a digit input device (off|on).  We obtained a Sony PS4 controller and found that the Unity simulator was able to respond correctly to this input device using the xboxdrv.  We include the PS4Controller.sh that we used to initialize the device for connecting to the simulator in the training-tools directory in the repository.  The new controller's analog to digital input gave us a floating point input which made the steering much smoother.
+We first started out with driving the simulator using keyboard, but that was unsatisfactory.  The controls were jerky and resulted in poor data collection, since it was a digit input device (off|on).  We obtained a Sony PS3 controller and found that the Unity simulator was able to respond correctly to this input device using the xboxdrv.  We include the PS3Controller.sh that we used to initialize the device for connecting to the simulator in the training-tools directory in the repository.  The new controller's analog to digital input gave us a floating point input which made the steering much smoother.
 
-![PS4 Joystick](./ps4joystick.jpg)
+![PS3 Joystick](./ps4joystick.jpg)
 
 ### 2c. Driving Both Counter Clockwise and Clockwise around Track1
 The training data were initially collected using the simulator for track 1 only in the forward direction (counter clockwise) for about 10 times.  However, during testing in Autonomous mode, we found that the CNN had a tendency of moving to the left, so we ran Track1 again 10 times in the reverse (clockwise) direction.  This is so we could make balance the left steering tendency with a set of right turn steers by going in the opposite direction.
@@ -112,7 +112,7 @@ As discussed earlier, these images if processed, will be converted to YUV and th
 As always, in our training we split the training data into batch training and validation, and we did this up to model7.  But stopped when we started using the Continuous (Agile) Trainer, which will be explained in the next section.
 
 ### 2f. Continuous (Agile) Trainer
-As we trained, we grew tired of having to batch and then train and rebatch as we found new issues with our training data, or missing data that we needed to train on.  This was very unsatisfactory, so we decided to try a different approach.  Barrowing from Agile development, we decided that the loop from model design, training and testing needs to be faster and more responsive, so we looked again at NVIDIA's paper for inspiration and we found this:
+As we trained, we grew tired of having to batch and then train and rebatch as we found new issues with our training data, or missing data that we needed to train on.  This was very unsatisfactory, so we decided to try a different approach.  Borrowing from Agile development, we decided that the loop from model design, training and testing needs to be faster and more responsive, so we looked again at NVIDIA's paper for inspiration and we found this:
 
 ![NVIDIA Driving Simulator](./NVIDIA_Drive_Simulator.png)
 
@@ -144,7 +144,7 @@ We built numerous testing and training tools as discussed in the previous sectio
 
 | Tool | Description | Usage |
 | :--- | :--- | :--- |
-| PS4Controller.sh | Shell script to launch PS4/XBOX controller driver | sudo ./PS4Controller.sh |
+| PS3Controller.sh | Shell script to launch PS3/XBOX controller driver | sudo ./PS3Controller.sh |
 | pygamejoy.py | Inspiration script to interface with joystick using pygame: http://www.pygame.org/docs/ref/joystick.html | python pygamejoy.py |
 | pygameJoyDriveInterface.py | Initial Prototype to interface pygame, drive.py and the model | python pygameJoyDriveInterface model.json |
 | continuousTrainer.py | Continuous Trainer | python continuousTrainer.py model.json |
