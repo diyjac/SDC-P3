@@ -5,25 +5,25 @@ Udacity Self-Driving Car Project 3: Behavioral Cloning
 Use Behavioral Cloning to train a CNN model to drive a car in a simulator.
 
 ## WARNING!  PLEASE NOTE!
-**It appears this model is not based on NVIDIA CNN after all, and is something completely different.  We are still trying to figure out why it works.  In addition, there maybe additional tuning that can be done to reduce the parameter size to even smaller than 147148 and still be able to drive the car in the Udacity simulator.  If you copy this model, please be warned that training this model may not be trivial, and perhaps only possible using the Agile Trainer.  I will update this Github repository with additional details as time allows.**
+**It appears this model is not based on NVIDIA CNN after all, and is something completely different.  We are still trying to figure out why it works.  In addition, there maybe additional tuning that can be done to reduce the parameter size to even smaller than 147148 and still be able to drive the car in the Udacity simulator.  If you copy this model, please be warned that training this model may not be trivial, and perhaps only possible using the Agile Trainer.  The information below may not be up to date or complete.  I will update this Github repository with additional details as time allows.**
 
 ## 1. Network Structure
 
-Our final CNN is based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.07316v1.pdf.  Before finalizing on this architecture, we experimented with a model from the Keras lab, and Comma.ai's model from: https://github.com/commaai/research.  The problem with both of these models is that they have too many model parameters and the hidden layers weights are much too large to be scalable.  The following table shows the size of the weights from save h5 files:
+Our final CNN was based on NVIDIA's CNN - Paper:  https://arxiv.org/pdf/1604.07316v1.pdf; however, when constructing it, we made an error with the Convolution ordering and created something completely different than the NVIDIA model.  Part of the goal of this project was to come up with a model with a segnificant smaller number of parameters.  Before finalizing on this architecture, we experimented with a model from the Keras lab, and Comma.ai's model from: https://github.com/commaai/research.  The problem with both of these models is that they have too many model parameters and the hidden layers weights are much too large to be scalable.  The following table shows the size of the weights from save h5 files.  Please note, while experimenting with parameter size reduction, we made an error with the Convolution2D function parameter ordering and again made something completely different than NVIDIA's model:
 
 | Model | File | Size (Bytes) | Description |
 |:---:|:---|---:|:---|
 | 1 | model1.h5 | 374997240 | Best performing Keras lab model |
 | 2 | model2.h5 | 2901288 | Comma.ai model, without Lamda layer |
 | 3 | model3.h5 | 26506536 | Comma.ai model, with Lamda layer |
-| 4 | model4.h5 | 620080 | NVIDIA model with Lamda layer |
-| 5 | model5.h5 | 620080 | NVIDIA model with Lamda layer - side cameras + YUV |
-| 6 | model6.h5 | 620080 | NVIDIA model with Lamda layer - track2 |
-| 7 | model7.h5 | 620080 | NVIDIA model with Lamda layer - track1, 1/3 top cropped, and dropouts |
-| 8 | model8.h5 | 620080 | NVIDIA model with Lamda layer - agile trainer |
-| F | model.h5 | 620080 | NVIDIA model with Lamda layer - final |
+| 4 | model4.h5 | 620080 | model with Lamda layer |
+| 5 | model5.h5 | 620080 | model with Lamda layer - side cameras + YUV |
+| 6 | model6.h5 | 620080 | model with Lamda layer - track2 |
+| 7 | model7.h5 | 620080 | model with Lamda layer - track1, 1/3 top cropped, and dropouts |
+| 8 | model8.h5 | 620080 | model with Lamda layer - agile trainer |
+| F | model.h5 | 620080 | model with Lamda layer - final |
 
-As can be seen, the NVIDIA based model weights are a lot smaller; and therefore, much more scalable and performs faster.  We pretty much followed the CNN network architecture from NVIDIA as outlined in their paper.  Our CNN consists of 10 layers, including an additional maxpool layer to even further reduce the number of parameters.  The layers includes a Lamda normalization layer, 5 convolutional layers and 3 fully connected layers with dropouts:
+As can be seen, the our model, which was supposed to be based on NVIDIA's model, weights are a lot smaller; and therefore, much more scalable and performs faster.  We very loosely based our model on the CNN network architecture from NVIDIA as outlined in their paper, but our model is different because of the different parameter ordering.  Our CNN consists of 10 layers, including an additional maxpool layer to even further reduce the number of parameters.  The layers includes a Lamda normalization layer, 5 convolutional layers and 3 fully connected layers with dropouts:
 
 | Layer (type) | Output Shape | Param # | Connected to |
 | :--- | :--- | ---: | :--- |
@@ -57,9 +57,10 @@ As can be seen, the NVIDIA based model weights are a lot smaller; and therefore,
 
 Total params: 147148
 
+### Loosely Based on NVIDIA's model.
 ![NVIDIA Architecture](./NVIDIA_CNN.png)
 
-More details of this architecture can be obtained in the NVIDIA paper as referenced earlier.  In the final architecture, we also included additional pre-processing steps.  These are:
+More details of this architecture will be re-documented soon.  In the final architecture, we also included additional pre-processing steps.  These are:
 
 - 1.  Resize the image from 320x160 to 200x66.
 - 2.  Convert the 200x66 image from RGB to YUV.
