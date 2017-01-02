@@ -5,7 +5,7 @@ Udacity Self-Driving Car Project 3: Behavioral Cloning
 Use Behavioral Cloning to train a CNN model to drive a car in a simulator.
 
 ## WARNING!  PLEASE NOTE!
-**It appears this model is not based on NVIDIA CNN after all, and is something completely different.  We are still trying to figure out why it works.  In addition, there maybe additional tuning that can be done to reduce the parameter size to even smaller than 147148 and still be able to drive the car in the Udacity simulator.  If you copy this model, please be warn that training this model may not be trivial, and purhaps only possible using the Agile Trainer.  I will update this Github repository with additional details as time allows.**
+**It appears this model is not based on NVIDIA CNN after all, and is something completely different.  We are still trying to figure out why it works.  In addition, there maybe additional tuning that can be done to reduce the parameter size to even smaller than 147148 and still be able to drive the car in the Udacity simulator.  If you copy this model, please be warned that training this model may not be trivial, and perhaps only possible using the Agile Trainer.  I will update this Github repository with additional details as time allows.**
 
 ## 1. Network Structure
 
