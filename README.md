@@ -4,7 +4,7 @@ Udacity Self-Driving Car Project 3: Behavioral Cloning
 
 Use Behavioral Cloning to train a CNN regression model to drive a car in a simulator.
 
-SDC-P3 is a program written in Python to train a regression Keras CNN model with a Tensorflow backend to steer a simulated car in Udacity's Open Sourced Self-Driving Car Simulator: [https://github.com/udacity/self-driving-car-sim](https://github.com/udacity/self-driving-car-sim).  More details can be found [here](./README-DETAILED)
+SDC-P3 is a program written in Python to train a regression Keras CNN model with a Tensorflow backend to steer a simulated car in Udacity's Open Sourced Self-Driving Car Simulator: [https://github.com/udacity/self-driving-car-sim](https://github.com/udacity/self-driving-car-sim).  More details about the model in this repository can be found [here](./README-DETAILED.md)
 
 *NOTE: The model in this repository was trained in the older simulator*
 
